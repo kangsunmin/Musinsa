@@ -1,0 +1,59 @@
+{% extends 'base.html' %} {% block content %}
+<script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css"
+  type="text/css"
+/>
+<header style="
+text-align: center;
+background-color: white;
+border: 1px solid black;
+border-radius: 66px;
+width:40%;
+margin:1rem 0;
+padding:10px;
+position:relative;
+left:30%;">
+    <h1 style="font-size:30px; margin-bottom:20px; font-family: 'Jua', sans-serif;">
+      Information
+    </h1>
+    <p style="font-family: 'Jua', sans-serif;"><em>1. 너무 어둡거나, 밝은 사진은 지양해주세요.</em><br>
+    2. 정면사진을 넣으시길 추천드립니다.<br>
+    3. 잘 못 올리신 경우 새로고침을 눌러주세요.</p>
+</header>
+<form
+  id="myAwesomeDropzone"
+  action="/reco/result"
+  class="dropzone"
+  method="POST"
+  style = "width: 40%;
+  position: relative;
+  left:30%;
+  margin-top:1rem;">
+
+{% csrf_token %}
+<button type="submit" id="button" class="btn btn-primary" style="    
+position: absolute;
+left: 83%;
+top: 95%;
+margin: 1rem;">Submit</button>
+</form>
+<script type="text/javascript">
+  Dropzone.autoDiscover = false
+  $("#myAwesomeDropzone").dropzone({
+    url: "/reco/",
+    addRemoveLinks: true,
+    method: "post",
+    filesizeBase: 1024,
+  })
+
+  $(document).ready(function () {
+    $("#myAwesomeDropzone").on("change", function () {
+      alert("changed")
+    })
+  })
+</script>
+
+
+{% endblock %}

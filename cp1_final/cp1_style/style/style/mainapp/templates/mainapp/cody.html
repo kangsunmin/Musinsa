@@ -1,0 +1,130 @@
+{% extends 'base.html' %} {% block content %}
+
+<script>
+  $(document).ready(function() {
+    $('#majorcategories').on('change', function() {
+      $('#subcategories').prop('disabled', false)
+      $('#subcategories').children().remove()
+      $('#subcategories').append($("<option class='default' hidden>옵션2</option>"))
+      
+      if($(this).val() == "out") {
+          $('#subcategories').append($("<option value='cardigan'>Cardigan</option>"))
+          $('#subcategories').append($("<option value='fleece'>Fleece</option>"))
+          $('#subcategories').append($("<option value='hood'>Hood</option>"))
+      } else if ($(this).val() == "top") {
+          $('#subcategories').append($("<option value='half'>Half</option>"))
+          $('#subcategories').append($("<option value='long'>Long</option>"))
+          $('#subcategories').append($("<option value='knit'>Knit</option>"))
+          $('#subcategories').append($("<option value='hood'>Hood</option>"))
+          $('#subcategories').append($("<option value='mantoman'>MtM</option>"))
+          $('#subcategories').append($("<option value='pk'>Pk</option>"))
+          $('#subcategories').append($("<option value='sleeveless'>Sleeveless</option>"))
+      } else if ($(this).val() == "bot"){
+          $('#subcategories').append($("<option value='cot'>Cotten</option>"))
+          $('#subcategories').append($("<option value='denim'>Denim</option>"))
+          $('#subcategories').append($("<option value='half'>Half</option>"))
+          $('#subcategories').append($("<option value='leggings'>Leggings</option>"))
+          $('#subcategories').append($("<option value='slax'>Slax</option>"))
+          $('#subcategories').append($("<option value='training'>Training</option>"))
+          $('#subcategories').append($("<option value='etc'>Etc</option>"))
+      } else {
+          $('#subcategories').append($("<option value='mini'>Short</option>"))
+          $('#subcategories').append($("<option value='midi'>Middle</option>"))
+          $('#subcategories').append($("<option value='long'>Long</option>"))
+      }     
+  })
+  })
+</script>
+
+  <div style="
+  text-align: center;
+  background-color: #F6F7F8;
+  border: 1px solid #D6D9DC;
+  border-radius: 53px;
+  width:45%;
+  margin:40px 0;
+  padding:10px;
+  position:relative;
+  left:30%;">
+      <h1 style="font-size:30px; margin-bottom:20px; font-family: 'Jua', sans-serif;">
+          User Information
+      </h1>
+      <p style="font-family: 'Jua', sans-serif;"><em>Please,fill out the fields below</em></p>
+  </div>
+  <form action="/cody/" method="post" style="
+  background-color:#F6F7F8;
+  border: 1px solid #D6D9DC;
+  border-radius:3px;
+  width:45%;
+  padding:10px;
+  margin:0 0 40px 0;
+  position:relative;
+  left:30%;">
+      <!-- 나이 -->
+      {% csrf_token %}
+      <div class="form-row">
+          <div class="form-group col-md-6" style="width:30%; font-family: 'Jua', sans-serif;">
+            <label for="height">나이</label>
+            <input style="margin-top:1rem;" type="text" class="form-control" name="age" id="age" placeholder="나이" />
+          </div>
+      </div>
+      <hr>
+
+      <fieldset class="form-group" >
+        <div class="row">
+          <legend class="col-form-label col-sm-1 pt-0" style="margin-top:0; font-family: 'Jua', sans-serif; width:5rem;">성별</legend>
+        </div>
+        <div class="col-sm-10" style="width:30%">
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="gender"
+              id="gender1"
+              value="0"
+              checked
+            />
+            <label class="form-check-label" for="gender1"> 남자 </label>
+          </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="gender" id="gender2" value="1" />
+              <label class="form-check-label" for="gender2"> 여자 </label>
+            </div>
+        </div>
+      </fieldset>
+      <hr>
+      <div class="form-row">
+        <div class="form-group col-md-6" style="width:30%; font-family: 'Jua', sans-serif;">
+          <label for="height">신장</label>
+          <input type="text" class="form-control" name="height" id="height" placeholder="ex)176" />
+        </div>
+        <hr>
+        <div class="form-group col-md-6" style="width:30%; font-family: 'Jua', sans-serif;">
+          <label for="weight">체중</label>
+          <input type="text" class="form-control" name="weight" id="weight" placeholder="ex)65" />
+        </div>
+      </div>
+      <hr>
+      <div class="form-group-row" style="width:30%; font-family: 'Jua', sans-serif;">
+        <select id="majorcategories" name="majorcategories" class="form-select" aria-label="Default select example">
+          <option hidden>옵션1</option>
+          <option value="out">Outer</option>
+          <option value="top">Top</option>
+          <option value="bot">Bot</option>
+          <option value="skirt">Skirt</option>
+        </select>
+        <hr>
+        <select id="subcategories" name="subcategories" class="form-select" aria-label="Default select example" disabled>
+          <option hidden>옵션2</option>
+        </select>
+        </div>
+        <hr>
+        <div class="form-group row">
+          <div class="col-sm-10">
+            <button type="submit" id="submit" class="btn btn-primary">Post</button>
+          </div>
+        </div>
+      </div>
+  </form>
+</div>
+{% endblock %}
